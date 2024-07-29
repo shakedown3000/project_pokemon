@@ -2,23 +2,29 @@ import "./Detailpage.css";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { IPokemonDetail } from "../../Interfaces/IPokemonDetail";
-import { PokemonContext } from "../../context/PokemonContext";
+import SinglePokemon from "../../components/SinglePokemon/SinglePokemon";
 
 const Detailpage = () => {
+  // Object Deconstruction (auspacken)
   const { id } = useParams<{ id?: string }>();
   const [filterPokemon, setFilterPokemon] = useState<IPokemonDetail | null>(
     null
   );
-  const pokemonContext = useContext(PokemonContext);
+  console.log(id);
 
   useEffect(() => {
-    if (pokemonContext && id) {
-      const found = pokemonContext.find((item) => item._id === id);
-      setFilterPokemon(found !== undefined ? found : null);
-    }
-  }, [id, pokemonContext]);
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .then((res) => res.json())
+      .then((data) => setFilterPokemon(data))
+      .catch((err) => console.error("Error by fetching data", err));
+  }, []);
 
-  return <section className="detailpage"></section>;
+  console.log(filterPokemon);
+  return (
+    <section className="detailpage">
+      <h1>{filterPokemon?.name}</h1>
+    </section>
+  );
 };
 
 export default Detailpage;

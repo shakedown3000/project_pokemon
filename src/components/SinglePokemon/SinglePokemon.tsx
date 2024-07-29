@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Result } from "../../Interfaces/IAllPokemons";
 import "./SinglePokemon.css";
 import { IPokemonDetail } from "../../Interfaces/IPokemonDetail";
+import { Link } from "react-router-dom";
 
 interface ISinglePokemonProps {
   item: Result;
@@ -25,12 +26,14 @@ const SinglePokemon: React.FC<ISinglePokemonProps> = (props) => {
 
   return (
     <section className="singlePokemon">
-      <p>{singlePokemon?.name}</p>
-      <p>{singlePokemon?.id}</p>
-      <img
-        src={singlePokemon?.sprites.other?.dream_world.front_default}
-        alt={singlePokemon?.name}
-      />
+      <Link to={`/detailpage/${singlePokemon?.name}`}>
+        <p>{singlePokemon?.name}</p>
+        <p>{singlePokemon?.id}</p>
+        <img
+          src={singlePokemon?.sprites.other?.dream_world.front_default}
+          alt={singlePokemon?.name}
+        />
+      </Link>
     </section>
   );
 };
