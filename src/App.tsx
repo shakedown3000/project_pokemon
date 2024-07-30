@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Detailpage from "./pages/Detailpage/Detailpage";
 import { useState } from "react";
-
 import {
   PokemonContext,
   UnfilteredPokemonContext,
 } from "./context/PokemonContext";
 import Header from "./components/Header/Header";
+import { Result } from "./Interfaces/IAllPokemons";
 
 function App() {
   // Wird aus dem Fetchallpokemon hier gespeichert
