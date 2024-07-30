@@ -13,6 +13,7 @@ interface IPokemonContext {
 export const PokemonContext = createContext<IPokemonContext | null>(null);
 
 // In UlfilteredPokemonContext werden alle Pokemons gespeichert und niemals bearbeitet
+
 interface IUnfilteredPokemonContext {
   unfilteredPokemon: Result[] | null;
   setUnfilteredPokemon: React.Dispatch<React.SetStateAction<Result[] | null>>;
