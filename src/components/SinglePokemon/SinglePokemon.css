@@ -1,0 +1,24 @@
+.singlePokemon {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.singlePokemon:hover {
+  transform: scale(1.05);
+}
+
+.singlePokemon img {
+  max-width: 100px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.singlePokemon p {
+  margin: 5px 0;
+}
