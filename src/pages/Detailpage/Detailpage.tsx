@@ -1,8 +1,7 @@
 import "./Detailpage.css";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IPokemonDetail } from "../../Interfaces/IPokemonDetail";
-import SinglePokemon from "../../components/SinglePokemon/SinglePokemon";
 
 const Detailpage = () => {
   // Object Deconstruction (auspacken)
