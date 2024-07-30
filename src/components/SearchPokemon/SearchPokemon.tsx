@@ -1,29 +1,36 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./SearchPokemon.css";
-import { PokemonContext } from "../../context/PokemonContext";
-import { IPokemonDetail } from "../../Interfaces/IPokemonDetail";
+import {
+  PokemonContext,
+  UnfilteredPokemonContext,
+} from "../../context/PokemonContext";
 
 const SearchPokemon = () => {
   const [query, setQuery] = useState("");
   const pokemonContext = useContext(PokemonContext);
+  const unfilteredContext = useContext(UnfilteredPokemonContext);
 
   // Ergebnis ist neues array
-  const handleSubmit = (event: SubmitEvent) => {
+  // In React gibt es kein Submit Event
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-    const filteredObjects = pokemonContext?.allPokemon?.results.filter(
-      (objekt) => objekt.name.startsWith(query)
-    );
-    console.log(filteredObjects);
+    // Wenn query leer ist, dann nimm wieder alle Daten
+    if (!query && unfilteredContext?.unfilteredPokemon) {
+      pokemonContext?.setAllPokemon(unfilteredContext?.unfilteredPokemon);
+      return;
+    }
+    if (pokemonContext?.allPokemon) {
+      const filteredObjects = pokemonContext?.allPokemon.filter((objekt) =>
+        objekt.name.startsWith(query.toLowerCase())
+      );
+      console.log(filteredObjects);
+      if (filteredObjects) {
+        // Hier update ich die Daten in der AppTSX für die Home Seite
+        // führt dazu dass in SinglePokemon neuer fetch ausgeführt wird
+        pokemonContext?.setAllPokemon(filteredObjects);
+      }
+    }
   };
-
-  // console.log(filterResults);
-
-  //   if (pokemonContext?.allPokemon?.results === null) {
-  //     return <h1>Loading...</h1>;
-  //   }
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
 
   console.log("Suchanfrage:", query);
 

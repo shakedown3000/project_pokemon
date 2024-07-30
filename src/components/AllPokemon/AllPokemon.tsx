@@ -17,7 +17,7 @@ const AllPokemon = () => {
       <h1>All Pokemons:</h1>
       {/* Wir gehen in den Array rein */}
       {/* Wir bilden hier die Connection zu SinglePokemon => item */}
-      {pokemonContext?.allPokemon.results.map((item, index) => (
+      {pokemonContext?.allPokemon.map((item, index) => (
         <SinglePokemon key={index} item={item} />
       ))}
     </section>
