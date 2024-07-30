@@ -7,7 +7,7 @@ const AllPokemon = () => {
   // muss jedes mal neu erstellt werden, bei den komponenten, die ich brauche
   const pokemonContext = useContext(PokemonContext);
   // Pokemon wurden geladen
-  console.log(pokemonContext);
+  // console.log(pokemonContext);
 
   if (pokemonContext?.allPokemon === null) {
     return <h1>Loading...</h1>;

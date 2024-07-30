@@ -21,7 +21,26 @@ const Detailpage = () => {
   console.log(filterPokemon);
   return (
     <section className="detailpage">
+      <img src={filterPokemon?.sprites.other?.dream_world.front_default}></img>
       <h1>{filterPokemon?.name}</h1>
+      <p>{filterPokemon?.id}</p>
+
+      <div>
+        <h2>Types</h2>
+        {/* Überprüft, ob filterPokemon und dessen types vorhanden sind */}
+        {filterPokemon?.types.length ? (
+          <div className="types-container">
+            {/* Mappt die Typen auf separate divs */}
+            {filterPokemon.types.map((typeInfo, index) => (
+              <div key={index} className="type-item">
+                {typeInfo.type.name}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No types available</p> // Falls keine Typen vorhanden sind
+        )}
+      </div>
     </section>
   );
 };
