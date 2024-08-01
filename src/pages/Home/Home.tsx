@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AllPokemon from "../../components/AllPokemon/AllPokemon";
 import SearchPokemon from "../../components/SearchPokemon/SearchPokemon";
 import TypeCategorization from "../../components/TypeCategorization/TypeCategorization";

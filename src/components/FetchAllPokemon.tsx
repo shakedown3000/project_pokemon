@@ -11,8 +11,7 @@ const FetchAllPokemon = () => {
   const unfilteredContext = useContext(UnfilteredPokemonContext);
 
   useEffect(() => {
-    // Limit auf 100 gesetzt
-    fetch("https://pokeapi.co/api/v2/pokemon?&offset=0")
+    fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
       .then((res) => res.json())
       .then((data: IallPokemons) => {
         // Daten reinschreiben, Daten zu diesem Zeitpunkt noch identisch

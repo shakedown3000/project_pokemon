@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Result } from "../../Interfaces/IAllPokemons";
 import { IType } from "../../Interfaces/IType";
-import { PokemonContext } from "../../context/PokemonContext";
+import {
+  ChosenTypeContext,
+  PokemonContext,
+} from "../../context/PokemonContext";
 
 interface ISingleTypeProps {
   item: Result;
@@ -12,8 +15,7 @@ const SingleType: React.FC<ISingleTypeProps> = (props) => {
   const pokemonContext = useContext(PokemonContext);
   const [typeClicked, setTypeClicked] = useState<IType | null>(null);
   const [valueChosen, setValueChosen] = useState<string | null>(null);
-
-  console.log(typeClicked?.name);
+  const chosenContext = useContext(ChosenTypeContext);
 
   // Buttons
   useEffect(() => {
@@ -23,13 +25,16 @@ const SingleType: React.FC<ISingleTypeProps> = (props) => {
       .catch((err) => console.error("Error by fetching data", err));
   }, []);
 
+  useEffect(() => {
+    chosenContext?.setChosenType(valueChosen);
+  }, [chosenContext?.chosenType]);
+
   function filterType(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
     event.preventDefault();
     console.log("Button clicked");
     const value = event.currentTarget.value;
-    console.log(value);
     if (pokemonContext) {
       fetch(value)
         .then((res) => res.json())
@@ -38,7 +43,7 @@ const SingleType: React.FC<ISingleTypeProps> = (props) => {
           // Wir wollen die Daten in Result Array umwandeln, um PokeContext upzudaten, wir creates neues array
           // Pokemon ist ein objekt array mit pokemon & Slot, und ich will da noch mal rein in pokemon (=> name und url. ist struktur von result)
           pokemonContext.setAllPokemon(typeArray);
-          setValueChosen(data.name);
+          chosenContext?.setChosenType(data.name);
         })
         .catch((err) => console.error("Error by fetching data", err));
     }
@@ -46,7 +51,6 @@ const SingleType: React.FC<ISingleTypeProps> = (props) => {
 
   return (
     <>
-      <h1>You chose: {valueChosen}</h1>
       <button value={props.item.url} onClick={filterType}>
         {props.item.name}
       </button>

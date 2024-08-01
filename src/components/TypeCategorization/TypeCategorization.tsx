@@ -3,13 +3,6 @@ import "./TypeCategorization.css";
 import { IallPokemons, Result } from "../../Interfaces/IAllPokemons";
 import SingleType from "../SingleType/SingleType";
 
-// interface ITypeCategorization {
-//   count: number;
-//   next: string;
-//   previous: null;
-//   results: Result[];
-// }
-
 const TypeCategorization = () => {
   const [typePokemon, setTypePokemon] = useState<Result[] | null>(null);
 

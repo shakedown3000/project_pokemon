@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Detailpage from "./pages/Detailpage/Detailpage";
 import { useState } from "react";
 import {
+  ChosenTypeContext,
   PokemonContext,
   UnfilteredPokemonContext,
 } from "./context/PokemonContext";
@@ -16,22 +17,25 @@ function App() {
   const [unfilteredPokemon, setUnfilteredPokemon] = useState<Result[] | null>(
     null
   );
+  const [chosenType, setChosenType] = useState<string | null>(null);
 
   return (
     <>
       {/* Verbindung zwischen UseState und Context, wir geben also beides mit, Provide = Mittelsmann, gibt state an jeder "Tür" ab, reicht es durch, wir wrappen den context daher auf der obersten Ebene um alles rum */}
       <PokemonContext.Provider value={{ allPokemon, setAllPokemon }}>
-        <UnfilteredPokemonContext.Provider
-          value={{ unfilteredPokemon, setUnfilteredPokemon }}
-        >
-          <BrowserRouter>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/detailpage/:id" element={<Detailpage />} />
-            </Routes>
-          </BrowserRouter>
-        </UnfilteredPokemonContext.Provider>
+        <ChosenTypeContext.Provider value={{ chosenType, setChosenType }}>
+          <UnfilteredPokemonContext.Provider
+            value={{ unfilteredPokemon, setUnfilteredPokemon }}
+          >
+            <BrowserRouter>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/detailpage/:id" element={<Detailpage />} />
+              </Routes>
+            </BrowserRouter>
+          </UnfilteredPokemonContext.Provider>
+        </ChosenTypeContext.Provider>
       </PokemonContext.Provider>
     </>
   );

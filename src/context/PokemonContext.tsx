@@ -21,3 +21,10 @@ interface IUnfilteredPokemonContext {
 
 export const UnfilteredPokemonContext =
   createContext<IUnfilteredPokemonContext | null>(null);
+
+interface IChosenType {
+  chosenType: string | null;
+  setChosenType: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export const ChosenTypeContext = createContext<IChosenType | null>(null);
